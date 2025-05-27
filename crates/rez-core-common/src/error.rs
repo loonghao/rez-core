@@ -1,7 +1,8 @@
 //! Error types for rez-core
 
-use thiserror::Error;
+#[allow(unused_imports)]
 use pyo3::prelude::*;
+use thiserror::Error;
 
 /// Main error type for rez-core operations
 #[derive(Error, Debug)]
@@ -26,6 +27,9 @@ pub enum RezCoreError {
 
     #[error("Python error: {0}")]
     Python(String),
+
+    #[error("PyO3 error: {0}")]
+    PyO3(#[from] pyo3::PyErr),
 }
 
 /// Result type alias for rez-core operations

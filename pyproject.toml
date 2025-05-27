@@ -32,29 +32,6 @@ Homepage = "https://github.com/loonghao/rez-core"
 Repository = "https://github.com/loonghao/rez-core"
 Issues = "https://github.com/loonghao/rez-core/issues"
 
-[dependency-groups]
-dev = ["maturin"]
-testing = [
-    { include-group = "dev" },
-    "pytest",
-    "pytest-cov",
-    "pytest-benchmark",
-    "pytest-mock",
-    "pytest-timeout",
-    "coverage",
-    "hypothesis",
-]
-linting = [
-    { include-group = "dev" },
-    "ruff",
-    "mypy",
-]
-all = [
-    { include-group = "dev" },
-    { include-group = "testing" },
-    { include-group = "linting" },
-]
-
 [tool.maturin]
 python-source = "python"
 module-name = "rez_core._rez_core"
@@ -142,7 +119,9 @@ strict_equality = true
 module = "tests.*"
 disallow_untyped_defs = false
 
-[tool.uv]
-# this ensures that `uv run` doesn't actually build the package; a `make`
-# command is needed to build
-package = false
+[dependency-groups]
+dev = [
+    "pytest>=8.3.5",
+    "pytest-benchmark>=4.0.0",
+    "pytest-cov>=5.0.0",
+]
